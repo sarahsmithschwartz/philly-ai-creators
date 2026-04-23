@@ -1,12 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Philly AI Creators</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philly AI Creators</title>
+<link rel="icon" href="IMG_9493.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Micro+5&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.1.0/index.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #080810;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .hero {
+    min-height: 100vh;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: #080810;
+  }
+
+  /* Scanlines */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.015) 3px,
+      rgba(255,255,255,0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  /* Brainy */
+  .brain-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 32px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+
+  .brain-wrap {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    image-rendering: pixelated;
+    mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(circle at 50% 55%,
+      black 0%,
+      black 42%,
+      rgba(0,0,0,0.85) 48%,
+      rgba(0,0,0,0.6) 54%,
+      rgba(0,0,0,0.3) 60%,
+      rgba(0,0,0,0.1) 65%,
+      transparent 70%
+    );
+    mask-image: radial-gradient(circle at 50% 55%,
+      black 0%,
+      black 42%,
+      rgba(0,0,0,0.85) 48%,
+      rgba(0,0,0,0.6) 54%,
+      rgba(0,0,0,0.3) 60%,
+      rgba(0,0,0,0.1) 65%,
+      transparent 70%
+    );
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+
+  /* Title */
+  h1 {
+    font-family: 'Micro 5', monospace;
+    font-size: 82px;
+    color: #ff4d8f;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0 #8b0035, 6px 6px 0 #40001a;
+    margin-bottom: 32px;
+    line-height: 1.1;
+  }
+
+  /* CTA Button */
+  .cta-btn {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 30px;
+    color: #ffe500;
+    background: transparent;
+    letter-spacing: 6px;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 40px;
+    text-decoration: none;
+    animation: blink 1.2s step-end infinite;
+  }
+
+  .cta-btn:hover {
+    color: #ff4d8f;
+    text-shadow: 0 0 12px #ff4d8faa, 0 0 30px #ff4d8f55;
+    animation: none;
+    opacity: 1;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  /* Description */
+  .desc {
+    font-size: 14px;
+    color: #c0b0d0;
+    max-width: 540px;
+    margin: 0 auto 44px;
+    line-height: 2.4;
+  }
+
+  .desc em { color: #ff9dca; font-style: normal; }
+
+  /* Stats row */
+  .score-row {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-bottom: 64px;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 2px;
+  }
+
+  .score-row .s { display: flex; flex-direction: column; gap: 6px; }
+  .score-row .sv { color: #ffe500; font-size: 13px; }
+
+  /* Founders */
+  .founders-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #ff4d8f;
+    margin-bottom: 24px;
+  }
+
+  .founders-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .fcard {
+    border: 2px solid #ff4d8f;
+    background: #0d0d22;
+    text-align: left;
+    position: relative;
+  }
+
+  .fcard::before {
+    content: 'P' attr(data-p);
+    position: absolute;
+    top: -1px;
+    left: 12px;
+    font-family: 'Jersey 10', monospace;
+    font-size: 12px;
+    color: #080810;
+    background: #ff4d8f;
+    padding: 2px 10px;
+    letter-spacing: 2px;
+  }
+
+  .fimg {
+    width: 100%;
+    height: 225px;
+    background: repeating-linear-gradient(
+      45deg,
+      #0d0d22,
+      #0d0d22 5px,
+      #141430 5px,
+      #141430 10px
+    );
+    border-bottom: 2px solid #ff4d8f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Replace with real photo: */
+    /* background-image: url('founder1.jpg');
+       background-size: cover;
+       background-position: center; */
+  }
+
+  .finfo { padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; }
+
+  .fname {
+    font-family: 'Micro 5', monospace;
+    font-size: 18px;
+    color: #ff9dca;
+    letter-spacing: 1px;
+  }
+
+  .frow {
+    font-size: 10px;
+    color: #888;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    line-height: 1.6;
+  }
+
+  .frow .lbl { color: #ffe500; flex-shrink: 0; }
+  .frow .lbl.li { color: #ff4d8f; }
+</style>
 </head>
 <body>
-  <h1>Philly AI Creators</h1>
-  <p>Coming soon.</p>
+<section class="hero">
+
+  <!-- Brainy -->
+  <div class="brain-container">
+    <div class="brain-wrap">
+      <img src="BRAINY.gif" alt="Brainy" width="300" height="300">
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h1>PHILLY AI CREATORS</h1>
+
+  <!-- CTA Button -->
+  <div>
+    <a href="mailto:hello@phillyaicreators.co?subject=I%20want%20to%20join%20Philly%20AI%20Creators" class="cta-btn">&#9654; CLICK HERE TO JOIN US &#9664;</a>
+  </div>
+
+  <!-- Description -->
+  <p class="desc">
+    A tight knit group of creators based near Philadelphia PA.<br>
+    Benjamin Franklin had his "Leather Apron Club". This is ours.<br>
+    Some of it's useful. Some of it's weird. All of it's real.<br>
+    We chat while we build.
+  </p>
+
+
+  <!-- Founders -->
+  <div class="founders-label">&#8212;&#8212; FOUNDERS &#8212;&#8212;</div>
+  <div class="founders-grid">
+
+    <div class="fcard" data-p="1">
+      <div class="fimg">
+        <img src="alyssa.png" alt="Alyssa" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="finfo">
+        <div class="fname">Alyssa Humlhanz</div>
+        <div class="frow"><span class="lbl">@</span><a href="https://uxwithalyssa.com" target="_blank" style="color:inherit;text-decoration:none;">uxwithalyssa.com</a></div>
+        <div class="frow"><span class="lbl li">in</span><a href="https://linkedin.com/in/alyssa-humlhanz/" target="_blank" style="color:inherit;text-decoration:none;">/in/alyssa-humlhanz/</a></div>
+      </div>
+    </div>
+
+    <div class="fcard" data-p="2">
+      <div class="fimg">
+        <img src="sarah.png" alt="Sarah" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="finfo">
+        <div class="fname">Sarah Schwartz</div>
+        <div class="frow"><span class="lbl">@</span><a href="https://kaleidoscopedesignstudio.com" target="_blank" style="color:inherit;text-decoration:none;">kaleidoscopedesignstudio.com</a></div>
+        <div class="frow"><span class="lbl li">in</span><a href="https://linkedin.com/in/sarah-smith-schwartz/" target="_blank" style="color:inherit;text-decoration:none;">/in/sarah-smith-schwartz/</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer style="margin-top: 64px; padding-bottom: 40px; font-size: 10px; color: #444; line-height: 2.2; letter-spacing: 1px;">
+    <p>This website was created using ClaudeCode, Figma, NanoBanana, and Midjourney.</p>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Philly AI Creators. All Rights Reserved.</p>
+  </footer>
+
+</section>
 </body>
 </html>
